@@ -1,12 +1,47 @@
-# React + Vite
+# Memory Match Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+这是一个使用 React 和 Vite 构建的记忆配对游戏。玩家需要翻开卡片并找到匹配的对。
 
-Currently, two official plugins are available:
+## 项目特性
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 使用 Vite 进行快速开发和构建
+- 支持热模块替换 (HMR)
+- 使用 Tailwind CSS 进行样式设计
+- ESLint 配置以确保代码质量
 
-## Expanding the ESLint configuration
+## 安装和运行
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. 克隆项目：
+
+   ```bash
+   git clone <repository-url>
+   cd memory-match
+   ```
+
+2. 安装依赖：
+
+   ```bash
+   yarn install
+   ```
+
+3. 启动开发服务器：
+
+   ```bash
+   yarn dev
+   ```
+
+4. 打开浏览器访问 [http://localhost:8888](http://localhost:8888)
+
+## 使用说明
+
+- 点击卡片翻开，寻找匹配的对。
+- 成功匹配后，卡片将保持翻开状态。
+- 所有卡片匹配成功后，将显示通关提示。
+
+## 贡献
+
+欢迎任何形式的贡献！请提交问题或拉取请求。
+
+## 许可证
+
+该项目使用 MIT 许可证，详细信息请查看 [LICENSE](LICENSE) 文件。
