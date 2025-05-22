@@ -5,11 +5,10 @@ const App = () => {
   const [cards, setCards] = useState([]); // 所有卡片的数组，包含每张卡片的状态（是否翻开、是否匹配）
   const [flippedCards, setFlippedCards] = useState([]); // 当前翻开的两张卡片，用于匹配判断
   const [isWaiting, setIsWaiting] = useState(false); // 是否正在等待匹配动画完成，防止动画过程中点击其他卡片
+  const [isGameWon, setIsGameWon] = useState(false); // 新增状态变量，表示游戏是否通关
   const animationTime = 500; // 匹配动画持续时间
-  const [isGameWon, setIsGameWon] = useState(false); // 新增状态变量
 
   // 使用 useMemo 缓存表情数组，避免每次渲染都重新创建数组
-  // 使用美食主题的表情符号，让游戏更有趣味性
   const emojis = useMemo(
     () => ["🍕", "🍔", "🍟", "🌭", "🍿", "🍦", "🍩", "🍪"],
     []
@@ -29,8 +28,8 @@ const App = () => {
       }));
     // 重置所有游戏状态
     setCards(cardPairs);
-    setFlippedCards([]);
-    setIsWaiting(false);
+    setFlippedCards([]); // 清空已翻开的卡片
+    setIsWaiting(false); // 设置为不在等待状态
     setIsGameWon(false); // 重置通关状态
   }, [emojis]);
 
@@ -53,7 +52,6 @@ const App = () => {
     if (flippedCards.length === 2) return;
     if (clickedCard.isFlipped || clickedCard.isMatched) return;
 
-    // 使用函数式更新来确保状态更新的准确性
     // 翻开被点击的卡片
     setCards((prevCards) =>
       prevCards.map((card) =>
@@ -65,7 +63,7 @@ const App = () => {
 
     // 如果已经翻开两张卡片，检查是否匹配
     if (flippedCards.length === 1) {
-      const firstCard = flippedCards[0];
+      const firstCard = flippedCards[0]; // 获取第一张翻开的卡片
       if (firstCard.emoji === clickedCard.emoji) {
         // 匹配成功：标记卡片为已匹配
         setCards((prevCards) =>
@@ -86,7 +84,7 @@ const App = () => {
                 : card
             )
           );
-          setIsWaiting(false);
+          setIsWaiting(false); // 动画完成后设置为不在等待状态
         }, animationTime); // 匹配失败动画持续500ms
       }
       // 清空已翻开卡片数组，准备下一轮匹配
@@ -111,17 +109,18 @@ const App = () => {
                   ? "rotate-y-180"
                   : "hover:bg-white"
               } shadow-md`}
-              onClick={() => handleCardClick(card)}
+              onClick={() => handleCardClick(card)} // 点击卡片时处理事件
             >
               <span className="text-3xl">
-                {card.isFlipped || card.isMatched ? card.emoji : "?"}
+                {card.isFlipped || card.isMatched ? card.emoji : "?"}{" "}
+                {/* 显示表情或问号 */}
               </span>
             </div>
           ))}
         </div>
         {/* 重新开始按钮 */}
         <button
-          onClick={initializeGame}
+          onClick={initializeGame} // 点击按钮时重新开始游戏
           className="inline-flex items-center justify-center rounded-md text-sm font-medium h-10 px-4 py-2 transition duration-300 bg-gradient-to-r from-pink-500 to-indigo-500 text-white transform hover:from-pink-600 hover:to-indigo-600 active:scale-95 active:shadow-lg"
         >
           重新开始
